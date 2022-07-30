@@ -5,9 +5,9 @@
       bordered
     >
 
-      <q-toolbar>
+      <q-toolbar class="constrain">
         <q-btn
-          class="large-screen-only"
+          class="large-screen-only q-mr-sm"
           to="/camera"
           flat
           round
@@ -15,6 +15,13 @@
           icon="eva-camera-outline"
           dense
         />
+
+        <q-separator
+          class="large-screen-only"
+          vertical
+          spaced
+        />
+
         <q-toolbar-title
           class="text-grand-hotel text-bold"
         >
@@ -76,10 +83,12 @@ export default defineComponent({
 </script>
 
 <style lang="sass">
+  .q-toolbar
+    height: 77px
+
   .q-toolbar__title
+    text-align: center
     font-size: 30px
-    @media (max-width: $breakpoint-xs-max)
-      text-align: center
 
   q.footer
     q.tab__icon
