@@ -6,11 +6,30 @@
     >
 
       <q-toolbar>
+        <q-btn
+          class="large-screen-only"
+          to="/camera"
+          flat
+          round
+          size="18px"
+          icon="eva-camera-outline"
+          dense
+        />
         <q-toolbar-title
           class="text-grand-hotel text-bold"
         >
           Quasagram
         </q-toolbar-title>
+
+        <q-btn
+          class="large-screen-only"
+          to="/"
+          flat
+          round
+          size="18px"
+          icon="eva-home-outline"
+          dense
+        />
       </q-toolbar>
 
     </q-header>
@@ -58,8 +77,9 @@ export default defineComponent({
 
 <style lang="sass">
   .q-toolbar__title
-    text-align: center
     font-size: 30px
+    @media (max-width: $breakpoint-xs-max)
+      text-align: center
 
   q.footer
     q.tab__icon
