@@ -1,7 +1,9 @@
 <template>
   <q-page class="constrain q-pa-md">
     <q-card
-      class="card-post"
+      v-for="post in posts"
+      :key="post.id"
+      class="card-post q-mb-md"
       flat
       bordered
     >
@@ -15,7 +17,7 @@
         <q-item-section>
           <q-item-label class="text-bold">fernandogomesfg</q-item-label>
           <q-item-label caption>
-            Maputo, Mozambique
+            {{ post.location }}
           </q-item-label>
         </q-item-section>
       </q-item>
@@ -23,12 +25,12 @@
       <q-separator />
 
       <q-img
-        src="https://cdn.quasar.dev/img/parallax2.jpg"
+        :src="post.imageUrl"
       />
 
       <q-card-section>
-        <div>Ponte Maputo</div>
-        <div class="text-caption text-grey">June 8, 9:24AM </div>
+        <div>{{ post.caption }}</div>
+        <div class="text-caption text-grey">{{ post.date | niceDate }}</div>
       </q-card-section>
 
     </q-card>
@@ -37,9 +39,53 @@
 
 <script>
 //import { defineComponent } from 'vue'
+import { date } from 'quasar'
 
 export default {
-  name: 'PageHome'
+  name: 'PageHome',
+  data() {
+    return {
+      posts: [
+        {
+          id: 1,
+          caption: 'Montanhas',
+          date: 1659235735330,
+          location: 'Beira, Mozambique',
+          imageUrl: 'https://cdn.quasar.dev/img/mountains.jpg'
+        },
+
+        {
+          id: 2,
+          caption: 'Golden Gate Bridge',
+          date: 1659235735330,
+          location: 'Xai-Xai, Mozambique',
+          imageUrl: 'https://cdn.quasar.dev/img/parallax2.jpg'
+        },
+
+        {
+          id: 3,
+          caption: 'Our Changing Planet',
+          date: 1659235735330,
+          location: 'Maputo, Mozambique',
+          imageUrl: 'https://cdn.quasar.dev/img/chicken-salad.jpg'
+        },
+
+        {
+          id: 4,
+          caption: 'Our Changing Planet',
+          date: 1659235735330,
+          location: 'Inhambane, Mozambique',
+          imageUrl: 'https://cdn.quasar.dev/img/parallax1.jpg'
+        }
+
+      ]
+    }
+  },
+  filters: {
+    niceDate(value) {
+      return date.formatDate(value, 'MMM D h:mmA')
+    }
+  }
 }
 </script>
 
