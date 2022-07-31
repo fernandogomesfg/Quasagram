@@ -18,7 +18,7 @@
     <div class="row justify-center q-ma-md">
        <q-input
         class="col col-sm-6"
-        v-model="text"
+        v-model="post.caption"
         label="Caption"
         dense
         />
@@ -27,7 +27,7 @@
     <div class="row justify-center q-ma-md">
        <q-input
         class="col col-sm-6"
-        v-model="text"
+        v-model="post.location"
         label="Location"
         dense
       >
@@ -51,11 +51,23 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+//import { defineComponent } from 'vue'
+import { uid } from 'quasar'
 
-export default defineComponent({
-  name: 'PageCamera'
-})
+export default {
+  name: 'PageCamera',
+  data() {
+    return {
+      post: {
+        id: uid(),
+        caption: '',
+        location: '',
+        photo: null,
+        date: Date.now()
+      }
+    }
+  }
+}
 </script>
 
 <style lang="sass">
