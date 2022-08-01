@@ -1,9 +1,11 @@
 <template>
   <q-page class="constrain-more q-pa-md">
     <div class="camera-frame q-pa-md">
-      <img
-        class="full-width "
-        src="https://cdn.quasar.dev/img/mountains.jpg" alt="">
+      <video
+        ref="video"
+        class="full-width"
+        autoplay
+      />
     </div>
 
     <div class="text-center q-pa-md">
@@ -53,6 +55,7 @@
 <script>
 //import { defineComponent } from 'vue'
 import { uid } from 'quasar'
+require('md-gum-polyfill')
 
 export default {
   name: 'PageCamera',
@@ -66,6 +69,18 @@ export default {
         date: Date.now()
       }
     }
+  },
+  methods: {
+    initCamera() {
+      navigator.mediaDevices.getUserMedia({
+        video: true
+      }).then(stream => {
+        this.$refs.video.srcObject = stream
+      })
+    }
+  },
+  mounted() {
+    this.initCamera()
   }
 }
 </script>
