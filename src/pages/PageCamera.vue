@@ -58,7 +58,11 @@
         dense
       >
         <template v-slot:append>
-          <q-btn round dense flat icon="eva-navigation-2-outline" />
+          <q-btn
+            @click="getLocation"
+            round
+            dense
+            flat icon="eva-navigation-2-outline" />
         </template>
       </q-input>
     </div>
@@ -165,7 +169,14 @@ export default {
     var blob = new Blob([ab], {type: mimeString});
     return blob;
 
-  }
+    },
+    getLocation() {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log('Position: ' ,position)
+      }, err => {
+        console.log('err: ',err)
+      }, { timeout: 7000 })
+    }
   },
   mounted() {
     this.initCamera()
