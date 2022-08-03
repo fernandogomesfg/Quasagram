@@ -52,6 +52,7 @@
 
     <div class="row justify-center q-ma-md">
        <q-input
+        :loading="locationLoading"
         class="col col-sm-6"
         v-model="post.location"
         label="Location"
@@ -59,6 +60,7 @@
       >
         <template v-slot:append>
           <q-btn
+            v-if="!locationLoading"
             @click="getLocation"
             round
             dense
@@ -98,7 +100,8 @@ export default {
       },
       imageCaptured: false,
       imageUpload: [],
-      hasCameraSupport: true
+      hasCameraSupport: true,
+      locationLoading: false
     }
   },
   methods: {
