@@ -195,8 +195,8 @@ export default {
   },
   locatioError() {
     this.$q.dialog({
-        title: 'Error',
-        message: 'Nenhum local foi encontrado'
+        title: 'Erro',
+        message: 'Nenhum local encontrado!'
     })
     this.locationLoading = false
   }
