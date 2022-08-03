@@ -172,10 +172,27 @@ export default {
     },
     getLocation() {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log('Position: ' ,position)
+        this.getCityAndCountry(position)
       }, err => {
         console.log('err: ',err)
       }, { timeout: 7000 })
+    },
+    getCityAndCountry(position) {
+      let apiUrl = `https://geocode.xyz/${ position.coords.latitude },${ position.coords.longitude }?json=1`
+      this.$axios.get(apiUrl).then(result => {
+        //console.log('result: ', result)
+        this.locationSuccess(result)
+      }).catch(err => {
+        //console.log('err: ', err)
+        this.locatioError()
+      })
+    },
+    locationSuccess(result) {
+      this.post.location = result.data.city
+      if (result.data.country) {
+        this.post.location += `, ${result.data.country}`
+    }
+    this.locationLoading = false
     }
   },
   mounted() {
