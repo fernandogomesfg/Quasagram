@@ -3,6 +3,16 @@
 */
   const express = require('express')
 
+  const admin = require('firebase-admin');
+
+  const serviceAccount = require('./serviceAccountKey.json');
+
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+
+  const db = admin.firestore();
+
 
   /**
    * config -express
@@ -14,18 +24,13 @@
    * endpoint - posts
    */
   app.get('/posts', (request, response) => {
-    let posts = [
-      {
-        caption: 'Golden Gate Bridge',
-        location: 'Inhambane, Mozambique'
-      },
-      {
-        caption: 'Montanhas',
-        location: 'Beira, Mozambique'
-      }
-    ]
-    response.send(posts)
-    //console.log('Good')
+    let posts = []
+    db.collection('posts').get().then(snapshot => {
+      snapshot.forEach((doc) => {
+        posts.push(doc.data())
+      });
+      response.send(posts)
+    })
   })
 
 app.listen(3000)
